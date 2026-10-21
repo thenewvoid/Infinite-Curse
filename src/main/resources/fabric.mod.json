@@ -1,0 +1,26 @@
+{
+	"schemaVersion": 1,
+	"id": "infinite_curse",
+	"version": "${version}",
+	"name": "无限诅咒",
+	"description": "戴上无限诅咒之戒，在厄刻的商店里越陷越深；于千咒台改写诅咒语法，最终窃取神格，成为千诅万咒之神。",
+	"authors": [
+		"WorkBuddy"
+	],
+	"license": "MIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.example.infinitecurse.InfiniteCurse"
+		],
+		"client": [
+			"com.example.infinitecurse.client.InfiniteCurseClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}

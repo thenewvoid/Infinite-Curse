@@ -1,0 +1,52 @@
+{
+  "player": ["你", "旅人", "勇者", "亡魂", "囚徒", "信徒"],
+  "action": [
+    { "key": "run", "display": "奔跑", "compatible": ["move_speed", "jump"] },
+    { "key": "mine", "display": "挖掘", "compatible": ["mining_speed", "attack_speed", "mining_pot"] },
+    { "key": "fight", "display": "战斗", "compatible": ["attack", "attack_speed", "armor", "weak"] },
+    { "key": "see", "display": "视物", "compatible": ["vision"] },
+    { "key": "breathe", "display": "呼吸", "compatible": ["oxygen"] },
+    { "key": "eat", "display": "进食", "compatible": ["hunger"] },
+    { "key": "mend", "display": "疗伤", "compatible": ["regen", "max_health"] }
+  ],
+  "attribute": [
+    { "key": "move_speed", "display": "移速", "category": "ATTRIBUTE", "target": "minecraft:generic.movement_speed" },
+    { "key": "jump", "display": "跳跃力", "category": "ATTRIBUTE", "target": "minecraft:generic.jump_strength" },
+    { "key": "max_health", "display": "生命上限", "category": "ATTRIBUTE", "target": "minecraft:generic.max_health" },
+    { "key": "armor", "display": "护甲", "category": "ATTRIBUTE", "target": "minecraft:generic.armor" },
+    { "key": "mining_speed", "display": "挖掘速度", "category": "ATTRIBUTE", "target": "minecraft:generic.block_break_speed" },
+    { "key": "attack", "display": "攻击力", "category": "ATTRIBUTE", "target": "minecraft:generic.attack_damage" },
+    { "key": "attack_speed", "display": "攻速", "category": "ATTRIBUTE", "target": "minecraft:generic.attack_speed" },
+    { "key": "vision", "display": "视野", "category": "POTION", "target": "minecraft:blindness" },
+    { "key": "mining_pot", "display": "矿觉", "category": "POTION", "target": "minecraft:mining_fatigue" },
+    { "key": "weak", "display": "气力", "category": "POTION", "target": "minecraft:weakness" },
+    { "key": "slow", "display": "步履", "category": "POTION", "target": "minecraft:slowness" },
+    { "key": "hunger", "display": "饱食", "category": "TICK", "target": "hunger" },
+    { "key": "oxygen", "display": "气息", "category": "TICK", "target": "oxygen" },
+    { "key": "regen", "display": "生机", "category": "TICK", "target": "regen" }
+  ],
+  "effect": [
+    { "key": "half", "display": "减半", "op": "MULTIPLY", "value": 0.5, "severity": -1.5, "impact": 0.6, "tags": { "auto": true, "special": false, "lethal": false, "reversible": true }, "baseCost": 200 },
+    { "key": "dbl", "display": "翻倍", "op": "MULTIPLY", "value": 2.0, "severity": -2.0, "impact": 0.6, "tags": { "auto": true, "special": false, "lethal": false, "reversible": true }, "baseCost": 280 },
+    { "key": "amp", "display": "提升50%", "op": "MULTIPLY", "value": 1.5, "severity": -1.0, "impact": 0.5, "tags": { "auto": true, "special": false, "lethal": false, "reversible": true }, "baseCost": 180 },
+    { "key": "dec", "display": "衰减30%", "op": "MULTIPLY", "value": 0.7, "severity": -1.0, "impact": 0.4, "tags": { "auto": true, "special": false, "lethal": false, "reversible": true }, "baseCost": 160 },
+    { "key": "zero", "display": "归零", "op": "SET", "value": 0.0, "severity": -4.0, "impact": 0.9, "tags": { "auto": false, "special": true, "lethal": false, "reversible": true }, "baseCost": 500 },
+    { "key": "rand", "display": "随机化", "op": "RANDOM", "value": 1.0, "severity": -2.0, "impact": 0.5, "tags": { "auto": true, "special": false, "lethal": false, "reversible": true }, "baseCost": 240 },
+    { "key": "blind", "display": "致盲", "op": "MULTIPLY", "value": 0.5, "severity": -2.0, "impact": 0.8, "tags": { "auto": true, "special": true, "lethal": false, "reversible": true }, "baseCost": 300 },
+    { "key": "fatigue", "display": "乏力", "op": "MULTIPLY", "value": 0.5, "severity": -1.5, "impact": 0.7, "tags": { "auto": true, "special": false, "lethal": false, "reversible": true }, "baseCost": 220 },
+    { "key": "frail", "display": "孱弱", "op": "MULTIPLY", "value": 0.5, "severity": -1.5, "impact": 0.7, "tags": { "auto": true, "special": false, "lethal": false, "reversible": true }, "baseCost": 220 },
+    { "key": "sluggish", "display": "迟滞", "op": "MULTIPLY", "value": 0.5, "severity": -1.5, "impact": 0.7, "tags": { "auto": true, "special": false, "lethal": false, "reversible": true }, "baseCost": 220 },
+    { "key": "starve", "display": "饥馑", "op": "MULTIPLY", "value": 0.5, "severity": -2.0, "impact": 0.8, "tags": { "auto": true, "special": false, "lethal": false, "reversible": true }, "baseCost": 260 },
+    { "key": "drown", "display": "窒息", "op": "MULTIPLY", "value": 0.5, "severity": -2.0, "impact": 0.8, "tags": { "auto": false, "special": true, "lethal": false, "reversible": true }, "baseCost": 260 },
+    { "key": "rot", "display": "腐坏", "op": "MULTIPLY", "value": 0.5, "severity": -2.0, "impact": 0.8, "tags": { "auto": true, "special": false, "lethal": false, "reversible": true }, "baseCost": 260 }
+  ],
+  "condition": [
+    { "key": "rain", "display": "雨中", "type": "raining" },
+    { "key": "night", "display": "夜幕下", "type": "night" },
+    { "key": "day", "display": "白昼", "type": "day" },
+    { "key": "water", "display": "水下", "type": "underwater" },
+    { "key": "deep", "display": "幽邃地底", "type": "underground" },
+    { "key": "hurt", "display": "伤重时", "type": "low_health" },
+    { "key": "nether", "display": "地狱中", "type": "nether" }
+  ]
+}
