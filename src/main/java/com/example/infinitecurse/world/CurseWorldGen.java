@@ -4,7 +4,6 @@ import com.example.infinitecurse.block.CurseBlocks;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -13,25 +12,25 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.placement.BiomeFilter;
-import net.minecraft.world.level.levelgen.placement.HeightmapPlacement;
-import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
-import net.minecraft.world.level.levelgen.placement.RarityFilter;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-
-import java.util.List;
 
 /**
  * 主世界诅咒地形自然生成（§新增）：在主世界地表散布"诅咒之森"与"诅咒岩地"地貌斑块，
  * 由诅咒方块构成；玩家踩上去即进入诅咒区域（见 CurseZone）。
+ *
+ * <p>注意（1.20.1 关键 API）：{@code CONFIGURED_FEATURE} / {@code PLACED_FEATURE} 是
+ * <b>动态注册表（数据包注册表）</b>，并不存在于 {@link BuiltInRegistries} 中，
+ * 不能在 mod 初始化阶段用 {@code Registry.register(...)} 写入（会得到 null 注册表并 NPE）。
+ * 因此这里只把自定义 {@link Feature} 注册进内置的 {@code FEATURE} 注册表，
+ * 而 configured / placed 特征通过 {@code data/infinite_curse/worldgen/} 下的 JSON 作为
+ * 数据包注册表自动加载；{@link BiomeModifications#addFeature} 在 biome 构建时按
+ * {@link ResourceKey} 查找 placed_feature。
  */
 public final class CurseWorldGen {
 
@@ -43,38 +42,15 @@ public final class CurseWorldGen {
 		registerPatch("curse_rockland", false);
 	}
 
-	@SuppressWarnings("unchecked")
 	private static void registerPatch(String name, boolean forest) {
+		// 自定义 Feature 注册到内置注册表（mod 初始化阶段可用）
 		Feature<NoneFeatureConfiguration> feature = new CursePatchFeature(forest);
 		Registry.register(BuiltInRegistries.FEATURE, new ResourceLocation("infinite_curse", name), feature);
 
-		ResourceKey<ConfiguredFeature<?, ?>> cfgKey = ResourceKey.create(Registries.CONFIGURED_FEATURE,
-				new ResourceLocation("infinite_curse", name + "_cfg"));
-		ConfiguredFeature<?, ?> configured = new ConfiguredFeature<>(feature, NoneFeatureConfiguration.INSTANCE);
-
+		// placed_feature 由 data/infinite_curse/worldgen/placed_feature/<name>_placed.json 提供，
+		// 作为动态注册表自动加载；此处仅按 ResourceKey 将其加入主世界地表装饰步骤。
 		ResourceKey<PlacedFeature> placedKey = ResourceKey.create(Registries.PLACED_FEATURE,
 				new ResourceLocation("infinite_curse", name + "_placed"));
-
-		// 该映射下 BuiltInRegistries 未暴露 CONFIGURED_FEATURE / PLACED_FEATURE 静态字段，
-		// 但二者作为内置注册表存在于 REGISTRY（注册表之注册表）中，可通过 ResourceKey 取得。
-		// 使用裸类型避免 ResourceKey<Registry<...>> 与 ResourceKey<Registry<?>> 的不变性冲突。
-		@SuppressWarnings("rawtypes")
-		Registry rootReg = (Registry) BuiltInRegistries.REGISTRY;
-		@SuppressWarnings("rawtypes")
-		Registry confReg = (Registry) rootReg.get(Registries.CONFIGURED_FEATURE);
-		@SuppressWarnings("rawtypes")
-		Registry placedReg = (Registry) rootReg.get(Registries.PLACED_FEATURE);
-
-		Registry.register(confReg, cfgKey, configured);
-
-		List<PlacementModifier> modifiers = List.of(
-				RarityFilter.onAverageOnceEvery(forest ? 220 : 320),
-				InSquarePlacement.spread(),
-				HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE_WG),
-				BiomeFilter.biome());
-		PlacedFeature placed = new PlacedFeature(Holder.direct(configured), modifiers);
-		Registry.register(placedReg, placedKey, placed);
-
 		BiomeModifications.addFeature(
 				BiomeSelectors.foundInOverworld(),
 				GenerationStep.Decoration.SURFACE_STRUCTURES,
