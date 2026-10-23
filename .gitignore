@@ -24,3 +24,9 @@ Thumbs.db
 
 # ===== WorkBuddy 内部数据 =====
 .workbuddy/
+
+# ===== 本地无关文件（非模组内容） =====
+PCL*.zip
+*.7z
+continue.md
+infinite-cruse-template*
