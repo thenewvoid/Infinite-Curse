@@ -57,12 +57,17 @@ public class InfiniteCurseClient implements ClientModInitializer {
 		// 右击 千咒台 / 商店 打开图形界面（客户端拦截，避免服务端直接执行）
 		UseBlockCallback.EVENT.register((Player player, Level world, InteractionHand hand, BlockHitResult hit) -> {
 			BlockState state = world.getBlockState(hit.getBlockPos());
+			// 必须在渲染线程上打开屏幕：Minecraft.setScreen 会先把 this.screen 指向新屏幕、
+			// 再调用其 init()（fabric 的事件即在 init 的 mixin 中初始化）。若此回调不在渲染线程
+			// 执行，渲染线程可能在 init() 跑完前就渲染该屏幕，导致 beforeRenderEvent 为 null 而崩溃。
+			// 用 execute(...) 把开屏推迟到渲染线程下一帧，确保 init() 先完成（§修复 2026-10-23）。
+			Minecraft client = Minecraft.getInstance();
 			if (state.getBlock() == CurseTableBlock.INSTANCE) {
-				Minecraft.getInstance().setScreen(new CurseScreen("altar"));
+				client.execute(() -> client.setScreen(new CurseScreen("altar")));
 				return InteractionResult.SUCCESS;
 			}
 			if (state.getBlock() == CurseShopBlock.INSTANCE) {
-				Minecraft.getInstance().setScreen(new CurseScreen("shop"));
+				client.execute(() -> client.setScreen(new CurseScreen("shop")));
 				return InteractionResult.SUCCESS;
 			}
 			return InteractionResult.PASS;

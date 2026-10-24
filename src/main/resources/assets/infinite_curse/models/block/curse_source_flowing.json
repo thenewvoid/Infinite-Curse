@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/water_flowing",
+  "textures": {
+    "still": "infinite_curse:fluid/curse_source_still",
+    "flow": "infinite_curse:fluid/curse_source_flow"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "level=0":  { "model": "infinite_curse:block/curse_source" },
+    "level=1":  { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=2":  { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=3":  { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=4":  { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=5":  { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=6":  { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=7":  { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=8":  { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=9":  { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=10": { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=11": { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=12": { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=13": { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=14": { "model": "infinite_curse:block/curse_source_flowing" },
+    "level=15": { "model": "infinite_curse:block/curse_source_flowing" }
+  }
+}

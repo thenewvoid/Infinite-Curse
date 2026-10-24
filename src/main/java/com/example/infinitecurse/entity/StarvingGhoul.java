@@ -42,6 +42,7 @@ public class StarvingGhoul extends AbstractCurseMob {
 				.add(Attributes.MAX_HEALTH, 22.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.27D)
 				.add(Attributes.ATTACK_DAMAGE, 3.5D)
+				.add(Attributes.ATTACK_KNOCKBACK, 0.0D)
 				.add(Attributes.FOLLOW_RANGE, 20.0D);
 	}
 

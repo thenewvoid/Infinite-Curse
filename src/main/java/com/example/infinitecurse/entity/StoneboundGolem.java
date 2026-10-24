@@ -42,6 +42,7 @@ public class StoneboundGolem extends AbstractCurseMob {
 				.add(Attributes.MAX_HEALTH, 60.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.18D)
 				.add(Attributes.ATTACK_DAMAGE, 6.0D)
+				.add(Attributes.ATTACK_KNOCKBACK, 0.0D)
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.6D)
 				.add(Attributes.FOLLOW_RANGE, 18.0D);
 	}

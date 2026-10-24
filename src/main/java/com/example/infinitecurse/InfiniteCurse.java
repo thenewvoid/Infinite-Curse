@@ -10,6 +10,7 @@ import com.example.infinitecurse.curse.DebtScheduler;
 import com.example.infinitecurse.entity.CurseEntities;
 import com.example.infinitecurse.fluid.CurseFluid;
 import com.example.infinitecurse.network.ModNetworking;
+import com.example.infinitecurse.item.CurseItemGroups;
 import com.example.infinitecurse.item.CurseRingItem;
 import com.example.infinitecurse.item.CursefireIngotItem;
 import com.example.infinitecurse.item.ReverseDustItem;
@@ -56,6 +57,9 @@ public class InfiniteCurse implements ModInitializer {
 
 		// 诅咒系列怪物：注册实体类型与默认属性（§新增）
 		CurseEntities.register();
+
+		// 模组创造标签页：物品/方块注册完成后登记（§建议 1/2 修复）
+		CurseItemGroups.register();
 
 		// 玩家进入：授予戒指 + 10 诅咒 / 重新应用已有诅咒
 		ServerPlayConnectionEvents.JOIN.register((listener, sender, server) -> {

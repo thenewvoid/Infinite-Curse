@@ -42,6 +42,7 @@ public class BlindEye extends AbstractCurseMob {
 				.add(Attributes.MAX_HEALTH, 16.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.32D)
 				.add(Attributes.ATTACK_DAMAGE, 3.0D)
+				.add(Attributes.ATTACK_KNOCKBACK, 0.0D)
 				.add(Attributes.FOLLOW_RANGE, 28.0D);
 	}
 

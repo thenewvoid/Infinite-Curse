@@ -39,6 +39,7 @@ public class CurseWisp extends AbstractCurseMob {
 				.add(Attributes.MAX_HEALTH, 10.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.28D)
 				.add(Attributes.ATTACK_DAMAGE, 2.0D)
+				.add(Attributes.ATTACK_KNOCKBACK, 0.0D)
 				.add(Attributes.FOLLOW_RANGE, 24.0D);
 	}
 

@@ -30,5 +30,6 @@
   "entity.infinite_curse.source_drowned": "源咒溺灵",
   "entity.infinite_curse.blind_eye": "瞽咒魔眼",
   "entity.infinite_curse.starving_ghoul": "饥馑噬魂",
-  "entity.infinite_curse.archcurse": "万咒之主"
+  "entity.infinite_curse.archcurse": "万咒之主",
+  "itemGroup.infinite_curse.general": "无限诅咒"
 }

@@ -42,6 +42,7 @@ public class SourceDrowned extends AbstractCurseMob {
 				.add(Attributes.MAX_HEALTH, 20.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.28D)
 				.add(Attributes.ATTACK_DAMAGE, 3.5D)
+				.add(Attributes.ATTACK_KNOCKBACK, 0.0D)
 				.add(Attributes.FOLLOW_RANGE, 22.0D);
 	}
 

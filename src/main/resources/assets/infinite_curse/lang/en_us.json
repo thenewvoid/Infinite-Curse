@@ -30,5 +30,6 @@
   "entity.infinite_curse.source_drowned": "Source Drowned",
   "entity.infinite_curse.blind_eye": "Blind Eye",
   "entity.infinite_curse.starving_ghoul": "Starving Ghoul",
-  "entity.infinite_curse.archcurse": "Archcurse"
+  "entity.infinite_curse.archcurse": "Archcurse",
+  "itemGroup.infinite_curse.general": "Infinite Curse"
 }
